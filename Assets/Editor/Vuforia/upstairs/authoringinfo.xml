@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<QCARInfo>
+    <TargetSet version="3.4">
+        <AreaTarget version="5.1" bbox="10.1625 -18.0977 40.6060 23.7540 -8.0436 59.3351" targetId="feae667d94a243a7b31ca6c2c131c316" name="upstairs" pathAuthoring="feae667d94a243a7b31ca6c2c131c316_authoring.glb" pathOcclusion="feae667d94a243a7b31ca6c2c131c316_occlusion.3dt" pathNavMesh="feae667d94a243a7b31ca6c2c131c316_navmesh.glb" cloudTarget="false" />
+    </TargetSet>
+</QCARInfo>

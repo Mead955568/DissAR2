@@ -10804,6 +10804,7 @@ MonoBehaviour:
   - Name: KitchenF2
     PositionObject: {fileID: 649147961}
   _navYOffset: {fileID: 643022478}
+  arCamera: {fileID: 571337796}
 --- !u!1 &1569238492
 GameObject:
   m_ObjectHideFlags: 0
