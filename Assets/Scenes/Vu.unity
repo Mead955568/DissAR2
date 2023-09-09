@@ -1530,6 +1530,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 651268898}
   - {fileID: 563107910}
   - {fileID: 1284507855}
   - {fileID: 644199727}
@@ -4021,14 +4022,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651268897}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.059002, y: -4.175606, z: 31.139547}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -326.059, y: -244.1756, z: 31.139547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 939079356}
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 141139100}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &651268899
 MonoBehaviour:
@@ -6110,7 +6111,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cb9ff94f819bf48b08b5d813e783c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qrCodeMappings: []
+  qrCodeMappings:
+  - QRCodeContent: 
+    PanelObject: {fileID: 1825815731}
+  - QRCodeContent: 
+    PanelObject: {fileID: 1177647055}
+  - QRCodeContent: 
+    PanelObject: {fileID: 1056436562}
+  - QRCodeContent: 
+    PanelObject: {fileID: 766002186}
 --- !u!1 &942248969
 GameObject:
   m_ObjectHideFlags: 0
@@ -8524,7 +8533,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1390183775
 GameObject:
