@@ -16,7 +16,7 @@ public class LineLengthTracker : MonoBehaviour
             float lineLength = CalculateLineLength(lineRenderer);
 
             // Update the TextMeshPro text with the line length
-            lengthText.text = "Line Length: " + lineLength.ToString("F2"); // Display with 2 decimal places
+            lengthText.text = "Distence: " + lineLength.ToString("F1") + " Meters"; // Display with 2 decimal places
         }
     }
 
