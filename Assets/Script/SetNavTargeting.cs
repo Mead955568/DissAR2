@@ -33,7 +33,7 @@ public class SetNavTargeting : MonoBehaviour
 
     private void Update() // Calculate Line Position
     {
-        if (_lineToggle && _targetPosition != Vector3.zero) 
+        if (_lineToggle && _targetPosition != Vector3.zero)
         {
             NavMesh.CalculatePath(arCamera.transform.position, _targetPosition, NavMesh.AllAreas, _path);
             _lineRenderer.positionCount = _path.corners.Length;
@@ -48,13 +48,12 @@ public class SetNavTargeting : MonoBehaviour
         Target currentTarget = _navTargetObjects.Find(x => x.Name.Equals(selectedText));
         if (currentTarget != null)
         {
-           if (!_lineRenderer.enabled)
+            if (!_lineRenderer.enabled)
             {
                 ToggleVisibility();
             }
 
             // Check If Floor Is Changing
-            // If Yes (Lead to Elevator), If No (Navigate)
 
             _targetPosition = currentTarget.PositionObject.transform.position;
         }
@@ -70,7 +69,7 @@ public class SetNavTargeting : MonoBehaviour
         currentFloor = floorNumber;
         SetNavTargetDropDownOptions(currentFloor);
     }
-    public Vector3[] AddLineOffset() 
+    public Vector3[] AddLineOffset()
     {
         if (_navYOffset.value == 0)
         {
@@ -94,9 +93,9 @@ public class SetNavTargeting : MonoBehaviour
             ToggleVisibility();
         }
 
-         if(floorNumber == 1)
+        if (floorNumber == 1)
         {
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube11"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube1"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube2"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube3"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube4"));
@@ -104,10 +103,16 @@ public class SetNavTargeting : MonoBehaviour
 
         if (floorNumber == 2)
         {
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Stairs"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Entrence"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Classroom"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Lobby"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Scanner"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Computer"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("TV"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Elevator"));
+        }
+        if (floorNumber == 3)
+        {
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Pipes"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Toilet"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Janitor"));
         }
     }
 }
