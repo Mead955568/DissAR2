@@ -95,20 +95,12 @@ public class SetNavTargeting : MonoBehaviour
 
         if (floorNumber == 1)
         {
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube1"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube2"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube3"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube4"));
-        }
-
-        if (floorNumber == 2)
-        {
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Scanner"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Computer"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("TV"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Elevator"));
         }
-        if (floorNumber == 3)
+        if (floorNumber == 2)
         {
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Pipes"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Toilet"));
