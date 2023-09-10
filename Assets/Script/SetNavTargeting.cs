@@ -20,7 +20,7 @@ public class SetNavTargeting : MonoBehaviour
 
     public GameObject arCamera;
 
-    private int _currentFloor = 1;
+    public int currentFloor = 1;
 
     private bool _lineToggle = false;
 
@@ -67,8 +67,8 @@ public class SetNavTargeting : MonoBehaviour
     }
     public void ChangeActiveFloor(int floorNumber)
     {
-        _currentFloor = floorNumber;
-        SetNavTargetDropDownOptions(_currentFloor);
+        currentFloor = floorNumber;
+        SetNavTargetDropDownOptions(currentFloor);
     }
     public Vector3[] AddLineOffset() 
     {
@@ -96,23 +96,18 @@ public class SetNavTargeting : MonoBehaviour
 
          if(floorNumber == 1)
         {
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube11"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube2"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube3"));
             _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube4"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube41"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube42"));
-            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Cube44"));
         }
 
-        //if (floorNumber == 1)
-        //{
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Stairs"));
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Entrence"));
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Classroom"));
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Lobby"));
-        //}
-        //if (floorNumber == 2)
-        //{
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("StairsF2"));
-        //    _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("KitchenF2"));
-        //}
+        if (floorNumber == 2)
+        {
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Stairs"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Entrence"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Classroom"));
+            _navTargetDropDown.options.Add(new TMP_Dropdown.OptionData("Lobby"));
+        }
     }
 }

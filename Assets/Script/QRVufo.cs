@@ -4,8 +4,10 @@ using Vuforia;
 
 public class QRVufo : MonoBehaviour
 {
-    public List<QRCodePanelMapping> qrCodeMappings = new List<QRCodePanelMapping>();
+    public List<QRCodeFloorMapping> qrCodeFloorMappings = new List<QRCodeFloorMapping>();
     private BarcodeBehaviour mBarcodeBehaviour;
+
+    public SetNavTargeting floor;
 
     void Start()
     {
@@ -23,22 +25,20 @@ public class QRVufo : MonoBehaviour
 
     private void HandleQRCode(string qrCodeText)
     {
-        QRCodePanelMapping mapping = qrCodeMappings.Find(x => x.QRCodeContent.ToLower() == qrCodeText.ToLower());
+        QRCodeFloorMapping mapping = qrCodeFloorMappings.Find(x => x.QRCodeContent.ToLower() == qrCodeText.ToLower());
 
         if (mapping != null)
         {
-            // Activate the corresponding TextMeshPro panel and deactivate others
-            foreach (QRCodePanelMapping qrCodeMapping in qrCodeMappings)
-            {
-                qrCodeMapping.PanelObject.SetActive(qrCodeMapping == mapping);
-            }
+            // Set the floor number from the mapping
+            floor.currentFloor = mapping.floorNumber;
         }
     }
 }
 
 [System.Serializable]
-public class QRCodePanelMapping
+public class QRCodeFloorMapping
 {
     public string QRCodeContent;
-    public GameObject PanelObject;
+    public int floorNumber; // Assign different floor numbers to each QR code mapping
 }
+
