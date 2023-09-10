@@ -7,7 +7,7 @@ public class QRVufo : MonoBehaviour
     public List<QRCodeFloorMapping> qrCodeFloorMappings = new List<QRCodeFloorMapping>();
     private BarcodeBehaviour mBarcodeBehaviour;
 
-    public SetNavTargeting floor;
+    public SetNavTargeting floorController; // Reference to the SetNavTargeting script
 
     void Start()
     {
@@ -29,8 +29,8 @@ public class QRVufo : MonoBehaviour
 
         if (mapping != null)
         {
-            // Set the floor number from the mapping
-            floor.currentFloor = mapping.floorNumber;
+            // Call the ChangeActiveFloor method with the floorNumber from the mapping
+            floorController.ChangeActiveFloor(mapping.FloorNumber);
         }
     }
 }
@@ -39,6 +39,5 @@ public class QRVufo : MonoBehaviour
 public class QRCodeFloorMapping
 {
     public string QRCodeContent;
-    public int floorNumber; // Assign different floor numbers to each QR code mapping
+    public int FloorNumber; // Assign different floor numbers to each QR code mapping
 }
-

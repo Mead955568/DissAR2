@@ -605,18 +605,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stairs
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1529996698}
-        m_TargetAssemblyTypeName: SetNavTargeting, Assembly-CSharp
-        m_MethodName: ChangeActiveFloor
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2059,7 +2047,7 @@ Transform:
   m_Children:
   - {fileID: 1324136308}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252489630
 GameObject:
@@ -2740,60 +2728,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323077809}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &328366969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 328366971}
-  - component: {fileID: 328366970}
-  m_Layer: 0
-  m_Name: Script Holder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &328366970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328366969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96cb9ff94f819bf48b08b5d813e783c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qrCodeFloorMappings:
-  - QRCodeContent: 
-    FloorNumber: 1
-  - QRCodeContent: 
-    FloorNumber: 2
-  - QRCodeContent: 
-    FloorNumber: 3
-  - QRCodeContent: 
-    FloorNumber: 4
-  floor: {fileID: 1529996698}
---- !u!4 &328366971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328366969}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37046164, y: -4.731832, z: 6.5090075}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &346641361
 GameObject:
   m_ObjectHideFlags: 0
@@ -4004,7 +3938,7 @@ Transform:
   m_Children:
   - {fileID: 434533781}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &553192405
 GameObject:
@@ -4037,7 +3971,7 @@ Transform:
   - {fileID: 1182218257}
   - {fileID: 175879384}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &559056599
 GameObject:
@@ -6173,7 +6107,7 @@ Transform:
   m_Children:
   - {fileID: 977720803}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886011061
 GameObject:
@@ -6364,19 +6298,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QrCodeRecenter, Assembly-CSharp
-        m_MethodName: ChangeActiveFloor
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: StairsF2
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1529996698}
         m_TargetAssemblyTypeName: SetNavTargeting, Assembly-CSharp
         m_MethodName: ChangeActiveFloor
         m_Mode: 3
@@ -6494,8 +6416,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cb9ff94f819bf48b08b5d813e783c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qrCodeFloorMappings: []
-  floor: {fileID: 0}
+  qrCodeFloorMappings:
+  - QRCodeContent: Lobby
+    FloorNumber: 1
+  - QRCodeContent: Stairs
+    FloorNumber: 2
+  floorController: {fileID: 1529996698}
 --- !u!114 &939079360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7313,7 +7239,7 @@ Transform:
   - {fileID: 950232075}
   - {fileID: 277710869}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110384948
 GameObject:
@@ -10003,7 +9929,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1510549278
 GameObject:
