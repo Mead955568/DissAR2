@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 74778176}
   - component: {fileID: 74778175}
   - component: {fileID: 74778174}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: FloorCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,9 +1356,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1284507855}
-  - {fileID: 644199727}
   - {fileID: 1651977211}
   - {fileID: 530154371}
+  - {fileID: 644199727}
   - {fileID: 1647668259}
   - {fileID: 1778940621}
   - {fileID: 1195997474}
@@ -11320,7 +11320,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 919
+    m_Bits: 663
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 90e8410d6da45424197015f15ab4d633, type: 2}
   m_TargetDisplay: 0
@@ -13969,13 +13969,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1988046983}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1988046989}
+        m_TargetAssemblyTypeName: Tracking, Assembly-CSharp
+        m_MethodName: SetCurrentNavTarget
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14945,6 +14945,7 @@ GameObject:
   - component: {fileID: 1988046986}
   - component: {fileID: 1988046985}
   - component: {fileID: 1988046984}
+  - component: {fileID: 1988046989}
   m_Layer: 0
   m_Name: Emergency
   m_TagString: Untagged
@@ -14959,7 +14960,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988046983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7019d2697f31e0f48966132888e6d64c, type: 3}
   m_Name: 
@@ -15120,6 +15121,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988046989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988046983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a590c67ebb65cf4c9c6966f0ab52c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navTargetDropDown: {fileID: 1826683834}
+  _navTargetTags:
+  - Fire Exit
+  - Fire Extinguisher
+  - Fire Alarm
+  arCamera: {fileID: 1680089760}
 --- !u!1 &2005873946
 GameObject:
   m_ObjectHideFlags: 0

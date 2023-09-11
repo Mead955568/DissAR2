@@ -6,6 +6,8 @@ using TMPro;
 public class Tracking : MonoBehaviour
 {
     [SerializeField]
+    private TMP_Dropdown _navTargetDropDown;
+    [SerializeField]
     private List<string> _navTargetTags = new List<string>(); // List of target tags
 
     private NavMeshPath _path; // Current Calculated Path
@@ -28,45 +30,70 @@ public class Tracking : MonoBehaviour
 
     private void Update()
     {
-        // Check for the closest target and update if necessary
-        UpdateClosestTarget();
-
         if (_lineToggle && _closestTarget != null)
         {
             NavMesh.CalculatePath(arCamera.transform.position, _closestTarget.position, NavMesh.AllAreas, _path);
             _lineRenderer.positionCount = _path.corners.Length;
             _lineRenderer.SetPositions(_path.corners);
         }
+
+        // Check for the closest target and update if necessary
+        UpdateClosestTarget();
     }
 
-    private void UpdateClosestTarget()
+    public void SetCurrentNavTarget(int selectedValue)
     {
-        GameObject[] taggedObjects = FindAllWithTaggedObjects();
+        _closestTarget = null; // Reset the closest target
 
-        if (taggedObjects.Length > 0)
+        string selectedText = _navTargetDropDown.options[selectedValue].text;
+
+        if (_navTargetTags.Contains(selectedText))
         {
-            // Find the new closest target among the objects with the specified tag
-            Transform newClosestTarget = FindClosestTarget(taggedObjects);
-
-            if (newClosestTarget != _closestTarget)
+            if (!_lineToggle)
             {
-                // If a new closest target is found, update the target
-                _closestTarget = newClosestTarget;
+                ToggleVisibility();
+            }
+
+            // Find all GameObjects with the selected tag
+            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(selectedText);
+
+            if (targetObjects.Length > 0)
+            {
+                // Find the closest target among the objects with the specified tag
+                _closestTarget = FindClosestTarget(targetObjects);
             }
         }
     }
 
-    private GameObject[] FindAllWithTaggedObjects()
+    public void ToggleVisibility()
     {
-        List<GameObject> taggedObjects = new List<GameObject>();
+        _lineToggle = !_lineToggle;
+        _lineRenderer.enabled = _lineToggle;
+        Debug.Log("Toggle Line Vis");
+    }
 
-        foreach (string tag in _navTargetTags)
+    private void UpdateClosestTarget()
+    {
+        if (_closestTarget != null)
         {
-            GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
-            taggedObjects.AddRange(objects);
-        }
+            // Calculate the distance to the current closest target
+            float currentDistance = Vector3.Distance(arCamera.transform.position, _closestTarget.position);
 
-        return taggedObjects.ToArray();
+            // Find all GameObjects with the specified tag
+            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(_closestTarget.tag);
+
+            if (targetObjects.Length > 0)
+            {
+                // Find the new closest target among the objects with the specified tag
+                Transform newClosestTarget = FindClosestTarget(targetObjects);
+
+                if (newClosestTarget != _closestTarget)
+                {
+                    // If a new closest target is found, update the target
+                    _closestTarget = newClosestTarget;
+                }
+            }
+        }
     }
 
     private Transform FindClosestTarget(GameObject[] targets)
