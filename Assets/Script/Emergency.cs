@@ -9,15 +9,14 @@ public class Emergency : MonoBehaviour
     private TMP_Dropdown objectTypeDropdown;
     [SerializeField]
     private LineRenderer lineRenderer;
-    private Camera arCamera;
+
+    public GameObject arCamera;
 
     private NavMeshPath navMeshPath;
     private string selectedObjectType = "";
 
     private void Start()
     {
-        arCamera = Camera.main;
-
         objectTypeDropdown.onValueChanged.AddListener(_ => SetSelectedObjectType());
 
         // Initialize the NavMeshPath
