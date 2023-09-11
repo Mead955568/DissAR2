@@ -1,66 +1,77 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using TMPro;
 
 public class Emergency : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
-    public LineRenderer lineRenderer; // Assign your LineRenderer prefab in the Inspector
-    private Camera arCamera; // Reference to the AR camera
-    private NavMeshAgent navMeshAgent; // Reference to the NavMeshAgent for pathfinding
+    [SerializeField]
+    private TMP_Dropdown objectTypeDropdown;
+    [SerializeField]
+    private LineRenderer lineRenderer;
+    private Camera arCamera;
+
+    private NavMeshPath navMeshPath;
+    private string selectedObjectType = "";
 
     private void Start()
     {
         arCamera = Camera.main; // Assumes you have a main camera set as the AR camera
 
         // Subscribe to the dropdown's onValueChanged event
-        dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+        objectTypeDropdown.onValueChanged.AddListener(_ => SetSelectedObjectType());
 
-        // Disable the Line Renderer initially
-        lineRenderer.enabled = false;
-
-        // Create a NavMeshAgent for pathfinding
-        navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-        navMeshAgent.enabled = false; // Disable it initially
+        // Initialize the NavMeshPath
+        navMeshPath = new NavMeshPath();
+        lineRenderer.enabled = false; // Initially, LineRenderer is disabled
     }
 
     private void Update()
     {
-        // Check if the Line Renderer is enabled and the NavMeshAgent is enabled
-        if (lineRenderer.enabled && navMeshAgent.enabled)
+        // Check if the Line Renderer should be enabled
+        if (!string.IsNullOrEmpty(selectedObjectType))
         {
-            // Update the Line Renderer's positions based on the NavMesh path
-            DrawNavMeshPath(navMeshAgent.path);
+            // Find all GameObjects with the specified tag (e.g., "FireExit", "FireExtinguish", "FireAlarm")
+            GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(selectedObjectType);
+
+            if (taggedObjects.Length == 0)
+            {
+                Debug.LogWarning("No objects with the selected tag found.");
+                return;
+            }
+
+            // Find the closest object
+            Transform closestObject = GetClosestObject(taggedObjects);
+
+            if (closestObject != null)
+            {
+                // Calculate the NavMesh path to the closest object
+                NavMesh.CalculatePath(arCamera.transform.position, closestObject.position, NavMesh.AllAreas, navMeshPath);
+
+                if (navMeshPath.status == NavMeshPathStatus.PathComplete)
+                {
+                    Debug.LogWarning("Path calculation Success.");
+
+                    // Enable the Line Renderer and set its positions to the calculated path
+                    lineRenderer.enabled = true;
+                    lineRenderer.positionCount = navMeshPath.corners.Length;
+                    lineRenderer.SetPositions(navMeshPath.corners);
+                }
+                else
+                {
+                    Debug.LogWarning("Path calculation failed.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No closest object found.");
+            }
         }
     }
 
-    private void OnDropdownValueChanged(int optionIndex)
+    private void SetSelectedObjectType()
     {
-        // Get the selected option from the dropdown
-        string selectedOption = dropdown.options[optionIndex].text;
-
-        // Find all GameObjects with the specified tag (e.g., "FireExit", "FireExtinguisher", "FireAlarm")
-        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(selectedOption);
-
-        if (taggedObjects.Length == 0)
-        {
-            Debug.LogWarning("No objects with the selected tag found.");
-            return;
-        }
-
-        // Find the closest object
-        Transform closestObject = GetClosestObject(taggedObjects);
-
-        if (closestObject != null)
-        {
-            // Enable the NavMeshAgent and set its destination to the closest object
-            navMeshAgent.enabled = true;
-            navMeshAgent.SetDestination(closestObject.position);
-        }
-        else
-        {
-            Debug.LogWarning("No closest object found.");
-        }
+        selectedObjectType = objectTypeDropdown.options[objectTypeDropdown.value].text;
     }
 
     private Transform GetClosestObject(GameObject[] objects)
@@ -79,15 +90,5 @@ public class Emergency : MonoBehaviour
             }
         }
         return closestObject;
-    }
-
-    private void DrawNavMeshPath(NavMeshPath path)
-    {
-        // Set the Line Renderer positions to match the NavMesh path
-        lineRenderer.positionCount = path.corners.Length;
-        for (int i = 0; i < path.corners.Length; i++)
-        {
-            lineRenderer.SetPosition(i, path.corners[i]);
-        }
     }
 }
