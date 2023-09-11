@@ -16,9 +16,8 @@ public class Emergency : MonoBehaviour
 
     private void Start()
     {
-        arCamera = Camera.main; // Assumes you have a main camera set as the AR camera
+        arCamera = Camera.main;
 
-        // Subscribe to the dropdown's onValueChanged event
         objectTypeDropdown.onValueChanged.AddListener(_ => SetSelectedObjectType());
 
         // Initialize the NavMeshPath
