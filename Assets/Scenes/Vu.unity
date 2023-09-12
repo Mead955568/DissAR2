@@ -1366,7 +1366,7 @@ RectTransform:
   - {fileID: 1857980470}
   - {fileID: 500331914}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1997,7 +1997,7 @@ Transform:
   m_Children:
   - {fileID: 408951864}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.16, y: -160.2, z: 0}
 --- !u!1 &245031387
 GameObject:
@@ -3789,7 +3789,7 @@ Transform:
   - {fileID: 2005873947}
   - {fileID: 135195024}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &497869306
 MonoBehaviour:
@@ -10898,7 +10898,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1515463304
 MonoBehaviour:
@@ -11061,10 +11061,10 @@ PositionConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529996694}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.71, y: 0, z: 3.86}
+  m_TranslationAtRest: {x: 13.72, y: 15.78, z: -21.38}
   m_TranslationOffset: {x: 13.72, y: 15.78, z: -21.38}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 0
@@ -11082,13 +11082,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529996694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.71, y: 0, z: 3.86}
+  m_LocalPosition: {x: 13.72, y: 15.78, z: -21.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 759504927}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1680089765}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1529996698
 MonoBehaviour:
@@ -13101,6 +13101,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1550931504}
+  - {fileID: 1529996697}
+  - {fileID: 1988046988}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15093,10 +15095,10 @@ PositionConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988046983}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.71000004, y: 0, z: 3.8600006}
+  m_TranslationAtRest: {x: 13.72, y: 15.78, z: -21.38}
   m_TranslationOffset: {x: 13.72, y: 15.78, z: -21.38}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 0
@@ -15114,12 +15116,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988046983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.71000004, y: 0, z: 3.8600006}
+  m_LocalPosition: {x: 13.72, y: 15.78, z: -21.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1680089765}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1988046989
 MonoBehaviour:
@@ -15138,6 +15140,7 @@ MonoBehaviour:
   - Fire Exit
   - Fire Extinguisher
   - Fire Alarm
+  flashingBallPrefab: {fileID: 6278813387859126443, guid: bfa5471cfbfe52444a69fb9e462bf269, type: 3}
   arCamera: {fileID: 1680089760}
 --- !u!1 &2005873946
 GameObject:

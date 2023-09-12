@@ -9,22 +9,28 @@ public class Tracking : MonoBehaviour
     private TMP_Dropdown _navTargetDropDown;
     [SerializeField]
     private List<string> _navTargetTags = new List<string>(); // List of target tags
+    [SerializeField]
+    private GameObject flashingBallPrefab; // Reference to the flashing ball prefab
 
     private NavMeshPath _path; // Current Calculated Path
     private LineRenderer _lineRenderer; // LineRenderer To Display Path
-    private Transform _closestTarget; // The closest target GameObject with the associated tag
+    private Dictionary<string, List<Transform>> _taggedObjects = new Dictionary<string, List<Transform>>(); // Organize objects by tag
 
     public GameObject arCamera;
 
     private bool _lineToggle = false;
+    private Transform _closestTarget; // The closest target GameObject with the associated tag
 
     private void Start()
     {
         _path = new NavMeshPath();
-        _lineRenderer = transform.GetComponent<LineRenderer>();
+        _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.enabled = _lineToggle;
 
-        // Initialize the closest target to null
+        // Initialize the tagged objects dictionary
+        InitializeTaggedObjects();
+
+        // Initialize closest target to null
         _closestTarget = null;
     }
 
@@ -41,29 +47,58 @@ public class Tracking : MonoBehaviour
         UpdateClosestTarget();
     }
 
+    private void InitializeTaggedObjects()
+    {
+        // Populate the tagged objects dictionary with objects having the specified tags
+        foreach (string tag in _navTargetTags)
+        {
+            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(tag);
+            _taggedObjects[tag] = new List<Transform>(targetObjects.Length);
+            foreach (GameObject obj in targetObjects)
+            {
+                _taggedObjects[tag].Add(obj.transform);
+            }
+        }
+    }
+
+    private GameObject _currentFlashingBall; // Reference to the currently instantiated flashing ball
+
     public void SetCurrentNavTarget(int selectedValue)
     {
-        _closestTarget = null; // Reset the closest target
+        // Reset the closest target
+        _closestTarget = null;
 
         string selectedText = _navTargetDropDown.options[selectedValue].text;
 
-        if (_navTargetTags.Contains(selectedText))
+        if (_taggedObjects.ContainsKey(selectedText))
         {
             if (!_lineToggle)
             {
                 ToggleVisibility();
             }
 
-            // Find all GameObjects with the selected tag
-            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(selectedText);
+            List<Transform> targetObjects = _taggedObjects[selectedText];
 
-            if (targetObjects.Length > 0)
+            if (targetObjects.Count > 0)
             {
                 // Find the closest target among the objects with the specified tag
                 _closestTarget = FindClosestTarget(targetObjects);
+
+                if (_closestTarget != null)
+                {
+                    // Destroy the previously instantiated flashing ball, if it exists
+                    if (_currentFlashingBall != null)
+                    {
+                        Destroy(_currentFlashingBall);
+                    }
+
+                    // Instantiate a new flashing ball at the closest target's position
+                    _currentFlashingBall = Instantiate(flashingBallPrefab, _closestTarget.position, Quaternion.identity);
+                }
             }
         }
     }
+
 
     public void ToggleVisibility()
     {
@@ -79,35 +114,46 @@ public class Tracking : MonoBehaviour
             // Calculate the distance to the current closest target
             float currentDistance = Vector3.Distance(arCamera.transform.position, _closestTarget.position);
 
-            // Find all GameObjects with the specified tag
-            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(_closestTarget.tag);
-
-            if (targetObjects.Length > 0)
+            if (_taggedObjects.ContainsKey(_closestTarget.tag))
             {
-                // Find the new closest target among the objects with the specified tag
-                Transform newClosestTarget = FindClosestTarget(targetObjects);
+                List<Transform> targetObjects = _taggedObjects[_closestTarget.tag];
 
-                if (newClosestTarget != _closestTarget)
+                if (targetObjects.Count > 0)
                 {
-                    // If a new closest target is found, update the target
-                    _closestTarget = newClosestTarget;
+                    // Find the new closest target among the objects with the specified tag
+                    Transform newClosestTarget = FindClosestTarget(targetObjects);
+
+                    if (newClosestTarget != _closestTarget)
+                    {
+                        // If a new closest target is found, update the target
+                        _closestTarget = newClosestTarget;
+
+                        // Destroy the previously instantiated flashing ball, if it exists
+                        if (_currentFlashingBall != null)
+                        {
+                            Destroy(_currentFlashingBall);
+                        }
+
+                        // Instantiate a new flashing ball at the new closest target's position
+                        _currentFlashingBall = Instantiate(flashingBallPrefab, _closestTarget.position, Quaternion.identity);
+                    }
                 }
             }
         }
     }
 
-    private Transform FindClosestTarget(GameObject[] targets)
+    private Transform FindClosestTarget(List<Transform> targets)
     {
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (GameObject target in targets)
+        foreach (Transform target in targets)
         {
-            float distance = Vector3.Distance(arCamera.transform.position, target.transform.position);
+            float distance = Vector3.Distance(arCamera.transform.position, target.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestTarget = target.transform;
+                closestTarget = target;
             }
         }
         return closestTarget;
