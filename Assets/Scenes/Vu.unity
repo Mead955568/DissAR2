@@ -9177,7 +9177,7 @@ GameObject:
   - component: {fileID: 1223794256}
   - component: {fileID: 1223794258}
   - component: {fileID: 1223794257}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: FloorCube Material
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11003,7 +11003,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.39954168
+        value: 0.10146123
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -11315,7 +11315,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 2
   m_Depth: 0
   m_CullingMask:
@@ -13076,7 +13076,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -15003,7 +15003,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1e7b98d85704bb43a2949dfb918c17f, type: 2}
+  - {fileID: 2100000, guid: d1f31488d6b61774986cc99cd9d6abf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15035,7 +15035,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.39954168
+        value: 0.10146123
         inSlope: 0
         outSlope: 0
         tangentMode: 0

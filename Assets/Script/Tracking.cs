@@ -110,7 +110,6 @@ public class Tracking : MonoBehaviour
                 closestTarget = target.transform;
             }
         }
-
         return closestTarget;
     }
 }
