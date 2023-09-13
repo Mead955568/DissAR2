@@ -13,20 +13,7 @@ public class SetNavTargeting : MonoBehaviour
     [SerializeField]
     private Slider _navYOffset;
     [SerializeField]
-    private GameObject canvasPrefab; // Reference to the Canvas prefab
-    [SerializeField]
-    private GameObject textPrefab; // Reference to the TextMeshProUGUI prefab
-    [SerializeField]
     private Transform cameraTransform; // Reference to the camera's transform
-
-    // Add public string fields for each message
-    public string message1 = "Scanner";
-    public string message2 = "Computer";
-    public string message3 = "TV";
-    public string message4 = "Elevator";
-    public string message5 = "Pipes";
-    public string message6 = "Toilet";
-    public string message7 = "Janitor";
 
     private NavMeshPath _path; // Current Calculated Path
     private LineRenderer _lineRenderer; // LineRenderer To Display Path
@@ -37,14 +24,21 @@ public class SetNavTargeting : MonoBehaviour
     public int currentFloor = 1;
 
     private bool _lineToggle = false;
-    private GameObject _currentCanvas; // Stores the currently displayed Canvas
-    private List<GameObject> _currentTextObjects = new List<GameObject>(); // Stores the currently displayed TextMeshProUGUI objects
+    private List<GameObject> _canvasObjects = new List<GameObject>(); // List of Canvas GameObjects associated with targets
 
     private void Start() // Create New Path
     {
         _path = new NavMeshPath();
         _lineRenderer = transform.GetComponent<LineRenderer>();
         _lineRenderer.enabled = _lineToggle;
+
+        // Initialize the list of Canvas GameObjects using the target names
+        foreach (var target in _navTargetObjects)
+        {
+            GameObject canvasObject = GameObject.Find(target.Name);
+            _canvasObjects.Add(canvasObject);
+            canvasObject.SetActive(false);
+        }
     }
 
     private void Update() // Calculate Line Position
@@ -62,9 +56,6 @@ public class SetNavTargeting : MonoBehaviour
     {
         _targetPosition = Vector3.zero; // Resets Target Position
 
-        // Destroy the previously displayed Canvas and TextMeshProUGUI objects (if any)
-        DestroyCanvas();
-
         string selectedText = _navTargetDropDown.options[selectedValue].text;
         Target currentTarget = _navTargetObjects.Find(x => x.Name.Equals(selectedText));
 
@@ -76,62 +67,26 @@ public class SetNavTargeting : MonoBehaviour
             }
 
             // Check If Floor Is Changing
-
             _targetPosition = currentTarget.PositionObject.transform.position;
 
-            // Display text above the selected game object
-            DisplayTextAboveObject(GetMessageForTarget(currentTarget.Name), currentTarget.PositionObject.transform);
+            // Disable all Canvas GameObjects
+            DisableAllCanvases();
+
+            // Enable the Canvas linked to the selected target
+            int index = _navTargetObjects.IndexOf(currentTarget);
+            if (index != -1)
+            {
+                _canvasObjects[index].SetActive(true);
+            }
         }
     }
 
-    private string GetMessageForTarget(string targetName)
+    private void DisableAllCanvases()
     {
-        // Assign the appropriate message based on the target name
-        switch (targetName)
+        foreach (var canvasObject in _canvasObjects)
         {
-            case "Scanner": return message1;
-            case "Computer": return message2;
-            case "TV": return message3;
-            case "Elevator": return message4;
-            case "Pipes": return message5;
-            case "Toilet": return message6;
-            case "Janitor": return message7;
-            default: return "";
+            canvasObject.SetActive(false);
         }
-    }
-
-    private void DisplayTextAboveObject(string text, Transform targetTransform)
-    {
-        // Instantiate a Canvas
-        _currentCanvas = Instantiate(canvasPrefab, targetTransform.position, Quaternion.identity);
-
-        // Instantiate a TextMeshProUGUI object inside the Canvas
-        GameObject textObject = Instantiate(textPrefab, _currentCanvas.transform);
-        _currentTextObjects.Add(textObject);
-
-        // Set the text and position of the TextMeshProUGUI object
-        TextMeshProUGUI textComponent = textObject.GetComponent<TextMeshProUGUI>();
-        if (textComponent != null)
-        {
-            textComponent.text = text;
-            textComponent.transform.LookAt(cameraTransform); // Rotate to face the camera
-            textComponent.transform.position = targetTransform.position + Vector3.up * 0f; // Adjust the height as needed
-        }
-    }
-
-    private void DestroyCanvas()
-    {
-        if (_currentCanvas != null)
-        {
-            Destroy(_currentCanvas);
-            _currentCanvas = null;
-        }
-
-        foreach (var textObject in _currentTextObjects)
-        {
-            Destroy(textObject);
-        }
-        _currentTextObjects.Clear();
     }
 
     public void ToggleVisibility()
@@ -139,9 +94,6 @@ public class SetNavTargeting : MonoBehaviour
         _lineToggle = !_lineToggle;
         _lineRenderer.enabled = _lineToggle;
         Debug.Log("Toggle Line Vis");
-
-        // Destroy the displayed Canvas and TextMeshProUGUI objects when toggling visibility
-        DestroyCanvas();
     }
 
     public void ChangeActiveFloor(int floorNumber)

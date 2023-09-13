@@ -12561,16 +12561,7 @@ MonoBehaviour:
   - Name: Janitor
     PositionObject: {fileID: 86138153}
   _navYOffset: {fileID: 174559952}
-  canvasPrefab: {fileID: 4489860393116267578, guid: 2092a40336c112d48affb935280f4a95, type: 3}
-  textPrefab: {fileID: 358306634489722119, guid: eba03133e780bb243bfe5d0b3092f2d8, type: 3}
   cameraTransform: {fileID: 1680089765}
-  message1: The scanner will not scan student numbers properly.
-  message2: The computer is not switching on despite repeated attempts.
-  message3: The TV screen displays a black screen with no signal.
-  message4: The elevator is stuck between floors, not responding to commands.
-  message5: There's a leak in the pipes, causing water to flood.
-  message6: The toilet is clogged and won't flush properly.
-  message7: The janitor's closet is locked, and we can't access supplies.
   arCamera: {fileID: 1680089760}
   currentFloor: 0
 --- !u!114 &1529996700
