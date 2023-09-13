@@ -49,7 +49,7 @@ public class Tracking : MonoBehaviour
 
     private void InitializeTaggedObjects()
     {
-        // Populate the tagged objects dictionary with objects having the specified tags
+        // Fill the tagged objects dictionary with objects having the specified tags
         foreach (string tag in _navTargetTags)
         {
             GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(tag);
@@ -61,7 +61,7 @@ public class Tracking : MonoBehaviour
         }
     }
 
-    private GameObject _currentFlashingBall; // Reference to the currently instantiated flashing ball
+    private GameObject _currentFlashingBall;
 
     public void SetCurrentNavTarget(int selectedValue)
     {
@@ -86,7 +86,7 @@ public class Tracking : MonoBehaviour
 
                 if (_closestTarget != null)
                 {
-                    // Destroy the previously instantiated flashing ball, if it exists
+                    // Destroy the previously instantiated flashing ball
                     if (_currentFlashingBall != null)
                     {
                         Destroy(_currentFlashingBall);
@@ -128,7 +128,7 @@ public class Tracking : MonoBehaviour
                         // If a new closest target is found, update the target
                         _closestTarget = newClosestTarget;
 
-                        // Destroy the previously instantiated flashing ball, if it exists
+                        // Destroy the previously instantiated flashing ball
                         if (_currentFlashingBall != null)
                         {
                             Destroy(_currentFlashingBall);
