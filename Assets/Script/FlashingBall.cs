@@ -7,6 +7,7 @@ public class FlashingBall : MonoBehaviour
     private float elapsedTime = 0f;
     private Renderer renderer;
 
+    private GameObject flashingBallPrefab;
     private void Start()
     {
         renderer = GetComponent<Renderer>();

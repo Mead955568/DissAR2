@@ -21,6 +21,8 @@ public class Tracking : MonoBehaviour
     private bool _lineToggle = false;
     private Transform _closestTarget; // The closest target GameObject with the associated tag
 
+    private GameObject _currentFlashingBall;
+
     private void Start()
     {
         _path = new NavMeshPath();
@@ -61,8 +63,6 @@ public class Tracking : MonoBehaviour
         }
     }
 
-    private GameObject _currentFlashingBall;
-
     public void SetCurrentNavTarget(int selectedValue)
     {
         // Reset the closest target
@@ -86,11 +86,8 @@ public class Tracking : MonoBehaviour
 
                 if (_closestTarget != null)
                 {
-                    // Destroy the previously instantiated flashing ball
-                    if (_currentFlashingBall != null)
-                    {
-                        Destroy(_currentFlashingBall);
-                    }
+                    // Destroy the previously instantiated flashing ball (if any)
+                    DestroyFlashingBall();
 
                     // Instantiate a new flashing ball at the closest target's position
                     _currentFlashingBall = Instantiate(flashingBallPrefab, _closestTarget.position, Quaternion.identity);
@@ -99,6 +96,14 @@ public class Tracking : MonoBehaviour
         }
     }
 
+    private void DestroyFlashingBall()
+    {
+        if (_currentFlashingBall != null)
+        {
+            Destroy(_currentFlashingBall);
+            _currentFlashingBall = null;
+        }
+    }
 
     public void ToggleVisibility()
     {
@@ -128,11 +133,8 @@ public class Tracking : MonoBehaviour
                         // If a new closest target is found, update the target
                         _closestTarget = newClosestTarget;
 
-                        // Destroy the previously instantiated flashing ball
-                        if (_currentFlashingBall != null)
-                        {
-                            Destroy(_currentFlashingBall);
-                        }
+                        // Destroy the previously instantiated flashing ball (if any)
+                        DestroyFlashingBall();
 
                         // Instantiate a new flashing ball at the new closest target's position
                         _currentFlashingBall = Instantiate(flashingBallPrefab, _closestTarget.position, Quaternion.identity);
@@ -157,5 +159,11 @@ public class Tracking : MonoBehaviour
             }
         }
         return closestTarget;
+    }
+
+    private void OnDisable()
+    {
+        // Ensure the flashing ball is destroyed when the script is disabled
+        DestroyFlashingBall();
     }
 }
