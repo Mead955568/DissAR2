@@ -115,7 +115,7 @@ public class SetNavTargeting : MonoBehaviour
         {
             textComponent.text = text;
             textComponent.transform.LookAt(cameraTransform); // Rotate to face the camera
-            textComponent.transform.position = targetTransform.position + Vector3.up * 2f; // Adjust the height as needed
+            textComponent.transform.position = targetTransform.position + Vector3.up * 0f; // Adjust the height as needed
         }
     }
 
